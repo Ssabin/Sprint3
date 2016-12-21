@@ -1,17 +1,17 @@
 <template>
     <section>
         <h1>Event Center Section</h1>
-         <event-filter></event-filter>
-         <event-group :filteredEvents="filteredEvents"></event-group>
+        <place-filter></place-filter>
+        <place-list :filteredPlaces="filteredPlaces"></place-list>
     </section>
 </template>
 
 <script>
-    import EventFilter from './EventFilter.vue'
-    import EventGroup from './EventGroup.vue'
+    import PlaceFilter from './PlaceFilter.vue'
+    import PlaceList from './PlaceList.vue'
     export default {
         props: {
-            events:{
+            places:{
                 required: true,
                 type: Array
             }
@@ -23,12 +23,12 @@
         methods: {
         },
         components:{
-            EventFilter,
-            EventGroup
+            PlaceFilter,
+            PlaceList
         },
         computed: {
-            filteredEvents() {
-                return this.events;
+            filteredPlaces() {
+                return this.places;
             }
         }
     }
