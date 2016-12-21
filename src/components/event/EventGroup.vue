@@ -27,14 +27,13 @@
             arrangeEmailsByDays(){
                 let events = {}; 
                 this.filteredEvents.forEach(event => {
-                    let date = this.getDateFormat(event.time);
-                    if(events[date]) events[date].push(event);
+                    let dateStr = this.getDateFormat(event.time);
+                    if(events[dateStr]) events[dateStr].push(event);
                     else{
-                        events[date] = [];
-                        events[date].push(event);
+                        events[dateStr] = [];
+                        events[dateStr].push(event);
                     }                       
                 });
-                console.log(events)
                 return events;
             }
         },
