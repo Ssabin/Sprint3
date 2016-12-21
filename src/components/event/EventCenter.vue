@@ -1,7 +1,7 @@
 <template>
     <section>
         <h1>Event Center Section</h1>
-         <event-filter></event-filter>
+         <event-filter :events="events" @filterEvents="updateFilter"></event-filter>
          <event-group :filteredEvents="filteredEvents"></event-group>
     </section>
 </template>
@@ -17,10 +17,19 @@
             }
         },
         data () {
-            return {        
+            return {
+                filter: {
+                    name: '',
+                    date: Date.now(),
+                    city: ''
+                }           
             }
         },
         methods: {
+            updateFilter(filter) {
+                this.filter = filter;
+                // console.log(filter);
+            }
         },
         components:{
             EventFilter,
@@ -28,7 +37,20 @@
         },
         computed: {
             filteredEvents() {
-                return this.events;
+                let filteredArray = this.events.filter(event => {
+                    const filter = this.filter;
+                    const name = event.name;
+                    const city = event.venue.city;
+                    const time = event.time;
+
+
+                    return(name.includes(filter.name) && 
+                           city.includes(filter.city) && 
+                           time >= new Date(filter.date).getTime())
+                    
+                });
+
+                return filteredArray;
             }
         }
     }
