@@ -1,4 +1,4 @@
-import Home from './pages/home.vue';
+import Home from './pages/Home.vue';
 
 import Email from './pages/Email.vue';
 import Event from './pages/Event.vue';
