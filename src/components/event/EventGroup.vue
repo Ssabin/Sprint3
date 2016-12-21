@@ -1,7 +1,6 @@
 <template>
     <section>
-         Event Group 
-         <event-group-list></event-group-list>
+         <event-group-list v-for="(dayEvents,day) in eventsByDays" :dayEvents="dayEvents" :day="day"></event-group-list>
     </section>
 </template>
 
@@ -15,16 +14,39 @@
             }
         },
         data () {
-            return {        
+            return {  
+
             }
         },
         methods: {
+            getDateFormat(ts){
+                let d = new Date(ts);
+                let dateFormatStr = `${d.getDate()}/${d.getMonth() + 1}/${d.getFullYear()}`;
+                return dateFormatStr;
+            },
+            arrangeEmailsByDays(){
+                let events = {}; 
+                this.filteredEvents.forEach(event => {
+                    let date = this.getDateFormat(event.time);
+                    if(events[date]) events[date].push(event);
+                    else{
+                        events[date] = [];
+                        events[date].push(event);
+                    }                       
+                });
+                console.log(events)
+                return events;
+            }
         },
         components:{
           EventGroupList  
         },
         computed:{
             //Divide filteredEvents by days.
+            eventsByDays () {
+                return this.arrangeEmailsByDays();
+                // return this.filteredEvents;
+            }
         }
     }
 </script>
