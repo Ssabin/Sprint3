@@ -1,7 +1,7 @@
 <template>
     <section>
         <h1>Event Center Section</h1>
-        <place-filter></place-filter>
+        <place-filter @filterPlaces="updateFilter"></place-filter>
         <place-list :filteredPlaces="filteredPlaces"></place-list>
     </section>
 </template>
@@ -12,7 +12,11 @@
     export default {
         data () {
             return {     
-                places: []   
+                places: [], 
+                filter: {
+                    txt: '',
+                    mode: 'N'
+                }
             }
         },
         methods: {
@@ -20,6 +24,9 @@
                 this.$http.get('place')
                    .then(res => res.json())
                    .then(places => this.places = places);
+           },
+           updateFilter(filter){
+               this.filter = filter;
            }
         },
         created(){
@@ -31,7 +38,13 @@
         },
         computed: {
             filteredPlaces() {
-                return this.places;
+                return this.places.filter(place => {
+                    if (this.filter.mode === 'N'){
+                        return place.name.toLowerCase().includes(this.filter.txt.toLowerCase());
+                    } else {
+                        return place.tags.some(tag => tag.toLowerCase().includes(this.filter.txt.toLowerCase()))
+                    }
+                });
             }
         }
     }

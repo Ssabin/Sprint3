@@ -1,7 +1,12 @@
 <template>
     <section>
-        <input type="text" placeholder="filter" />
-        <hr>
+        <div>
+        <input type="text" placeholder="Search email" v-model="filter.txt" @input="emitFilter"/>
+        <div>
+            <input type="radio" value="N" v-model="filter.mode" @change="emitFilter"/> Name
+            <input type="radio" value="T" v-model="filter.mode" @change="emitFilter"/> Tags
+        </div>
+    </div>
     </section>
 </template>
 
@@ -9,13 +14,16 @@
     export default {
         data () {
             return {     
+                filter: {
+                    txt: '',
+                    mode: 'N'
+                }
             }
         },
         methods: {
-            
-        },
-        created(){
-            
+            emitFilter(){
+                this.$emit('filterPlaces' , this.filter);
+            }
         }
     }
 </script>
