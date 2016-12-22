@@ -3,7 +3,8 @@
          <p>{{day}}</p>
          <event-preview 
             v-for="event in dayEvents" 
-            :event="event" 
+            :event="event"
+            :day="day"
             style="border: 1px solid black"></event-preview>
     </section>
 </template>

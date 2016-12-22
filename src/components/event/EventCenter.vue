@@ -28,6 +28,11 @@
            },
             updateFilter(filter) {
                 this.filter = filter;
+            },
+            sortFilteredEvents(events){
+                return events.sort((eventA , eventB) => {
+                    return eventA.time - eventB.time;
+                });
             }
         },
         components:{
@@ -38,17 +43,17 @@
             filteredEvents() {
                 let filteredArray = this.events.filter(event => {
                     const filter = this.filter;
-                    const name = event.name;
-                    const city = event.venue.city;
+                    const name = event.name.toLowerCase();
+                    const city = event.venue.city.toLowerCase();
                     const time = event.time;
 
 
-                    return(name.includes(filter.name) && 
-                           city.includes(filter.city) && 
+                    return(name.includes(filter.name.toLowerCase()) && 
+                           city.includes(filter.city.toLowerCase()) && 
                            time >= new Date(filter.date).getTime())
                     
                 });
-
+                this.sortFilteredEvents(filteredArray)
                 return filteredArray;
             }
         },

@@ -1,10 +1,8 @@
 <template>
     <section class="event-details">
-        <!--<h1>Event Details Section</h1>-->
         <h1>{{event.name}}</h1>
         <p><strong>Status:</strong> {{event.status}}</p>
-        <div v-html="eventDescription"></div>
-        <!--<p>{{eventDescription}}</p>-->
+        <div v-html="event.description"></div>
         <p><strong>Location:</strong> {{event.venue.address_1}} - {{event.venue.city}} </p>
         <p>Time: {{formatedDate}}</p>
         <p>Link: <a :href="event.link">MEETUP</a> </p>
@@ -29,28 +27,18 @@
             }
         },
         methods: {
-            formatDate() {
-                // console.log(this.event)
-            },
             loadEvent(eventId) {
                 
                 this.$http.get(`event/${eventId}`)
                    .then(res => res.json())
                    .then(event => this.event = event);
-
-                //    this.formatDate();
            }
         },
         created(){
             const eventId = this.$route.params.id;
-            // console.log(eventId);
-
             this.loadEvent(eventId);
         },
         computed: {
-            eventDescription() {
-                return this.event.description.replace(/<img[^>]*>/g,'');;
-            },
             formatedDate() {
                 const event = this.event;
                 const time = new Date(event.time);
