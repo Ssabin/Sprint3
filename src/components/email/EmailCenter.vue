@@ -3,6 +3,7 @@
     <h1>Email Center Section</h1>
     <email-filter :emails="emails" @filterEmails="updateFilter"></email-filter>
     <email-list :filteredEmails="filteredEmails"></email-list>
+    <email-status :totalEmailCount="emails.length" :unreadEmailCount="unreadEmailCount"></email-status>
     <!--
     <div class="email-box box">
       <button @click="isComposeMode = true" class="button is-primary modal-button">Compose Email</button>
@@ -27,6 +28,7 @@
 <script>
 import EmailFilter from './EmailFilter.vue'
 import EmailList from './EmailList.vue'
+import EmailStatus from './EmailStatus.vue'
 // import EmailCompose from './email-compose.vue'
 
 // import EmailDetails from './email-details.vue'
@@ -95,7 +97,8 @@ export default {
   components: {
       // 'email-list': EmailList,
       EmailFilter,
-      EmailList
+      EmailList,
+      EmailStatus
       // 'email-compose': EmailCompose,
       // 'email-details': EmailDetails,
       // 'email-status': EmailStatus,
@@ -117,6 +120,11 @@ export default {
               if(this.filter.emailStatus === 'A') return email;
            }
        }); 
+      },
+      unreadEmailCount() {
+        return this.emails.reduce((acc, currEmail) => {
+          return currEmail.isRead ? 0 : ++acc;
+        }, 0);
       }
     },
     created() {

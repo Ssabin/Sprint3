@@ -1,15 +1,20 @@
 <template>
     <section>
-        <p>Not Read Emails: {{emailsNotReadCounter}}</p>
+        <p>Total email count: {{totalEmailCount}}</p>
+        <p>Unread email count: {{unreadEmailCount}}</p>
     </section>
 </template>
 
 <script>
     export default{
         props:{
-            emailsNotReadCounter:{
+            totalEmailCount: {
                 required: true,
                 type: Number
+            },
+            unreadEmailCount: {
+                required: true,
+                type: Number 
             }
         },
         data(){

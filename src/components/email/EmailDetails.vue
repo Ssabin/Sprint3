@@ -14,6 +14,8 @@
         <div class="email-content">
             {{email.content}}
         </div>
+        <button @click="deleteEmail">DELETE</button>
+
         <!--<button class="delete-btn" @click="deleteEmail">Delete Email</button>-->
     </section>
 </template>
@@ -30,6 +32,22 @@
                 this.$http.get(`email/${emailId}`)
                    .then(res => res.json())
                    .then(email => this.email = email);
+            },
+            deleteEmail() {
+                const isSure = confirm('Are you sure you want to delete?');
+                if (!isSure) return;
+                let that = this;
+                function handleResult(res) {
+                    res.json()
+                   .then(res => {
+                           console.log("Result from server", res);
+                        //    that.$emit('done')
+                        // this.dataSaved = true;
+                        this.$router.push('/email');
+                       }) 
+                }
+
+                this.$http.delete(`email/${this.email.id}`).then(handleResult);
             }
             // closeDetails(ev){
             //     this.$emit('closeDetails');

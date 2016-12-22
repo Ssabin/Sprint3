@@ -6,7 +6,7 @@ import Place from './pages/Place.vue'
 
 import EmailCenter from './components/email/EmailCenter.vue'
 import EmailDetails from './components/email/EmailDetails.vue'
-// import EmailEdit from './components/email/EmailEdit.vue'
+import EmailCompose from './components/email/EmailCompose.vue'
 
 import EventCenter from './components/event/EventCenter.vue'
 import EventDetails from './components/event/EventDetails.vue'
@@ -22,8 +22,8 @@ export default [
     { path: '/email', component: Email ,children:[
         {path: '' , component: EmailCenter},
         // {path: 'edit' , component: EmailEdit},
-        {path: ':id' , component: EmailDetails},
-        // {path: 'edit/:id' , component: EmailEdit},        
+        {path: 'compose' , component: EmailCompose},        
+        {path: ':id' , component: EmailDetails}
     ]},
     { path: '/event', component: Event , children:[
         {path: '' , component: EventCenter},
