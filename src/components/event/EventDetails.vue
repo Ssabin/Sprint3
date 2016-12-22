@@ -33,6 +33,7 @@
                    .then(res => res.json())
                    .then(event => this.event = event);
            }
+
         },
         created(){
             const eventId = this.$route.params.id;
