@@ -1,11 +1,12 @@
 <template>
-    <section class="email-details message">
-        <div class="close" @click="closeDetails">X</div>
+    <section>
+        <!--{{email}}-->
+        <!--<div class="close" @click="closeDetails">X</div>-->
         <h1 class="title">{{email.subject}}</h1>
         <div class="details">
             <div>
                 <p>From: {{email.from}}</p>
-                <p>From: {{email.to}}</p>
+                <!--<p>From: {{email.to}}</p>-->
             </div>
             <p class="time">At: {{email.date}}</p>
         </div>
@@ -13,35 +14,40 @@
         <div class="email-content">
             {{email.content}}
         </div>
-        <button class="delete-btn" @click="deleteEmail">Delete Email</button>
+        <!--<button class="delete-btn" @click="deleteEmail">Delete Email</button>-->
     </section>
 </template>
 
 <script>
     export default{
-        props:{
-            email:{
-                type: Object
-            }
-        },
         data(){
             return {
-
+                email: {venue:{},description: ''}
             }
         },
         methods:{
-            closeDetails(ev){
-                this.$emit('closeDetails');
-            },
-            deleteEmail(){
-                this.$emit('deleteEmail',this.email.id);
+            loadEmail(emailId) {
+                this.$http.get(`email/${emailId}`)
+                   .then(res => res.json())
+                   .then(email => this.email = email);
             }
+            // closeDetails(ev){
+            //     this.$emit('closeDetails');
+            // },
+            // deleteEmail(){
+            //     this.$emit('deleteEmail',this.email.id);
+            // }
+        },
+        created(){
+            const emailId = this.$route.params.id;
+
+            this.loadEmail(emailId);
         }
     }
 </script>
 
 <style scoped>
-    .email-details {
+    /*.email-details {
         padding: 10px 30px;
         position: relative;
     }
@@ -78,5 +84,5 @@
     .delete-btn:hover{
         color: #FFF;
         background: #333;
-    }
+    }*/
 </style>

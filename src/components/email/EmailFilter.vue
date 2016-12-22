@@ -11,12 +11,12 @@
 
 <script>
     export default{
-        props:{
-            emails:{
-                required: true,
-                type: Array
-            }
-        },
+        // props:{
+        //     emails:{
+        //         required: true,
+        //         type: Array
+        //     }
+        // },
         data(){
             return {
                 filter:{
