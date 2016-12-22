@@ -13,8 +13,6 @@
         data () {
             return {
                 events: [],
-                eventToEdit: undefined,
-                showEventEdit: false,
                 filter: {
                     name: '',
                     date: Date.now(),
@@ -27,8 +25,6 @@
                 this.$http.get('event')
                    .then(res => res.json())
                    .then(events => this.events = events);
-                this.eventToEdit = undefined;   
-                this.showEventEdit = false;
            },
             updateFilter(filter) {
                 this.filter = filter;
@@ -56,8 +52,7 @@
                 return filteredArray;
             }
         },
-        mounted(){
-            console.log('loadEvents')
+        created(){
             this.loadEvents();
         }
     }
