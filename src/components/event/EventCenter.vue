@@ -10,14 +10,9 @@
     import EventFilter from './EventFilter.vue'
     import EventGroup from './EventGroup.vue'
     export default {
-        props: {
-            events:{
-                required: true,
-                type: Array
-            }
-        },
         data () {
             return {
+                events: [],
                 filter: {
                     name: '',
                     date: Date.now(),
@@ -26,9 +21,13 @@
             }
         },
         methods: {
+            loadEvents() {
+                this.$http.get('event')
+                   .then(res => res.json())
+                   .then(events => this.events = events);
+           },
             updateFilter(filter) {
                 this.filter = filter;
-                // console.log(filter);
             }
         },
         components:{
@@ -52,6 +51,9 @@
 
                 return filteredArray;
             }
+        },
+        created(){
+            this.loadEvents();
         }
     }
 </script>
