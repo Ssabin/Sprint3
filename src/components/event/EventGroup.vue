@@ -34,7 +34,7 @@
                         events[dateStr].push(event);
                     }                       
                 });
-                console.log(events)
+                // console.log(events)
                 return events;
             }
         },
@@ -45,7 +45,6 @@
             //Divide filteredEvents by days.
             eventsByDays () {
                 return this.arrangeEmailsByDays();
-                // return this.filteredEvents;
             }
         }
     }
