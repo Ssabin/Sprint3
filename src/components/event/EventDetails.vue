@@ -39,7 +39,7 @@
                    .then(event => this.event = event);
 
                 //    this.formatDate();
-           }
+            }
         },
         created(){
             const eventId = this.$route.params.id;
