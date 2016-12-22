@@ -5,8 +5,9 @@
             <input ref="name" type="text" placeholder="title" v-model.lazy="eventToEdit.name">
             <div>
                 <input ref="status" type="text" placeholder="status" v-model.lazy="eventToEdit.status"> | 
-                <input ref="time" type="date" :value="inputDateFormat" @input="getTimeStamp($event)"/>
+                <input ref="date" type="date" :value="inputDateFormat" @input="getTimeStamp"/>
             </div>
+            <input ref="time" type="time" :value="inputTimeFormat" @input="getTimeStamp"/>
             <!--Todo: Geocode search input-->
             <input ref="link" type="text" placeholder="Event link" v-model.lazy="eventToEdit.link"/>
             <br>
@@ -67,6 +68,9 @@
             },
             inputDateFormat(){
                 return this.getInputDateFormat(this.eventToEdit.time)
+            },
+            inputTimeFormat(){
+                return this.getInputTimeFormat(this.eventToEdit.time)
             }
         },
         methods: {
@@ -75,18 +79,24 @@
                    .then(res => res.json())
                    .then(event => this.event = event);
            },
-            getTimeStamp(ev){
-                this.eventToEdit.time = new Date(ev.target.value).getTime();
+            getTimeStamp(){
+                this.eventToEdit.time = new Date(`${this.$refs.date.value} ${this.$refs.time.value}`).getTime();
             },
             getInputDateFormat(timeStamp){
                 let d = new Date(timeStamp);
-                let formatedDate = `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`;
+                let formatedDate = `${d.getFullYear()}-${(d.getMonth() + 1) > 10 ? (d.getMonth() + 1) : '0' + (d.getMonth() + 1)}-${d.getDate() > 10 ? d.getDate() : '0' + d.getDate()}`;
                 return formatedDate;
+            },
+            getInputTimeFormat(timeStamp){
+                let d = new Date(timeStamp);
+                let formatedTime = `${d.getHours() > 10 ?d.getHours():('0' + d.getHours())}:${d.getMinutes() > 10 ?d.getMinutes():('0' + d.getMinutes())}`;
+                return formatedTime;
             },
             resetForm(){
                 this.$refs.name.value = this.event.name; 
                 this.$refs.status.value = this.event.status; 
-                this.$refs.time.value = this.getInputDateFormat(this.event.time);
+                this.$refs.date.value = this.getInputDateFormat(this.event.time);
+                this.$refs.time.value = this.getInputTimeFormat(this.event.time);
                 this.$refs.description.value = this.event.description; 
                 this.$refs.link.value = this.event.link; 
             },
