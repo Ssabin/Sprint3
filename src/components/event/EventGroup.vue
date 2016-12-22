@@ -34,6 +34,7 @@
                         events[dateStr].push(event);
                     }                       
                 });
+                console.log(events)
                 return events;
             }
         },

@@ -10,17 +10,20 @@
     import PlaceFilter from './PlaceFilter.vue'
     import PlaceList from './PlaceList.vue'
     export default {
-        props: {
-            places:{
-                required: true,
-                type: Array
-            }
-        },
         data () {
-            return {        
+            return {     
+                places: []   
             }
         },
         methods: {
+            loadPlaces() {
+                this.$http.get('place')
+                   .then(res => res.json())
+                   .then(places => this.places = places);
+           }
+        },
+        created(){
+            this.loadPlaces();
         },
         components:{
             PlaceFilter,
