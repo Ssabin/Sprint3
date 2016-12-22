@@ -7,7 +7,7 @@
         <p>Time: {{formatedDate}}</p>
         <p>Link: <a :href="event.link">MEETUP</a> </p>
         <router-link :to="`/event/edit/${event.id}`">Edit</router-link>
-        <div class="map" ref="map">
+        <div class="map" ref="map"></div>
             <!--<hr>-->
     </section>
 </template>

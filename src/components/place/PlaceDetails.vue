@@ -1,6 +1,9 @@
 <template>
     <section>
         <h1>Place Details Section</h1>
+        <p>name:</p> <span>{{place.name}}</span>
+        <!--TODO show adress-->
+        <p>tags:</p> <span v-for="tag in place.tags">{{tag}},</span>
         <hr>
     </section>
 </template>
@@ -9,19 +12,19 @@
     export default {
         data () {
             return {    
-                place: null    
+                place: {id: 1}    
             }
         },
         methods: {
-        //     loadEvent(eventId) {
-        //         this.$http.get(`event/${eventId}`)
-        //            .then(res => res.json())
-        //            .then(event => this.event = event);
-        //    }
+            loadEvent(placeId) {    
+                this.$http.get(`place/${placeId}`)
+                   .then(res => res.json())
+                   .then(place => this.place = place);
+           }
         },
         created(){
-            // const eventId = this.$route.params.id;
-            // this.loadEvent(eventId);
+            const placeId = this.$route.params.id;
+            this.loadEvent(placeId);
         }
     }
 </script>
