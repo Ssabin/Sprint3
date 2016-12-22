@@ -1,16 +1,16 @@
 <template>
-    <section>
+    <section class="event-details">
         <!--<h1>Event Details Section</h1>-->
         <h1>{{event.name}}</h1>
         <p><strong>Status:</strong> {{event.status}}</p>
-        <div v-html="event.description"></div>
+        <div v-html="eventDescription"></div>
+        <!--<p>{{eventDescription}}</p>-->
         <p><strong>Location:</strong> {{event.venue.address_1}} - {{event.venue.city}} </p>
-        <p>Time: {{new Date(event.time)}}</p>
+        <p>Time: {{formatedDate}}</p>
         <p>Link: <a :href="event.link">MEETUP</a> </p>
-
         <router-link :to="`/event/edit/${event.id}`">Edit</router-link>
         <div class="map" ref="map">
-            <hr>
+            <!--<hr>-->
     </section>
 </template>
 
@@ -25,22 +25,47 @@
             // loadEvent lo maspik to load .....
             // should make loader in case the call to server takes time
             return {    
-                event: {venue:{}}   
+                event: {venue:{},description: ''}   
             }
         },
         methods: {
+            formatDate() {
+                // console.log(this.event)
+            },
             loadEvent(eventId) {
                 
                 this.$http.get(`event/${eventId}`)
                    .then(res => res.json())
                    .then(event => this.event = event);
+
+                //    this.formatDate();
            }
         },
         created(){
             const eventId = this.$route.params.id;
-            console.log(eventId);
+            // console.log(eventId);
 
             this.loadEvent(eventId);
+        },
+        computed: {
+            eventDescription() {
+                return this.event.description.replace(/<img[^>]*>/g,'');;
+            },
+            formatedDate() {
+                const event = this.event;
+                const time = new Date(event.time);
+                const day = time.getDate();
+                const month = time.getMonth() + 1;
+                const year = time.getFullYear();
+                const hour = time.getHours();
+                let minute = time.getMinutes();
+
+                if (minute < 10) {
+                    minute = '0' + minute;
+                }
+
+                return `${day}/${month}/${year} - ${hour}:${minute}`;
+            }
         },
         updated() {
 
@@ -73,5 +98,9 @@
     .map {
         width: 400px;
         height: 400px;
+    }
+
+    .event-details {
+        border: 3px solid hotpink;
     }
 </style>
