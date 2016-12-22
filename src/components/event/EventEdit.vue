@@ -28,7 +28,7 @@
                     "duration": 9000000,
                     "name": "",
                     "status": "upcoming",
-                    "time": 0,
+                    "time": new Date().getTime(),
                     "updated": 0,
                     "utc_offset": 7200000,
                     "waitlist_count": 0,
