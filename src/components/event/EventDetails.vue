@@ -1,14 +1,18 @@
 <template>
     <section class="event-details">
+        <nav class="app-nav">
+            <router-link class="btn btn-primary" to="/event" exact>Event List</router-link>
+            <router-link class="btn btn-warning" :to="`/event/edit/${event.id}`">Edit</router-link>
+        </nav>
         <h1>{{event.name}}</h1>
         <p><strong>Status:</strong> {{event.status}}</p>
-        <div v-html="event.description"></div>
+        <div class="description" v-html="event.description"></div>
         <p><strong>Location:</strong> {{event.venue.address_1}} - {{event.venue.city}} </p>
         <p>Time: {{formatedDate}}</p>
         <p>Link: <a :href="event.link">MEETUP</a> </p>
-        <router-link :to="`/event/edit/${event.id}`">Edit</router-link>
+
         <div class="map" ref="map"></div>
-            <!--<hr>-->
+        <!--<hr>-->
     </section>
 </template>
 
@@ -57,9 +61,6 @@
             }
         },
         updated() {
-
-
-            // Some events have lon/lat of zero!!!
             const lat = this.event.venue.lat;
             const lon = this.event.venue.lon;
             GoogleMapsLoader.load(google => {
@@ -83,13 +84,26 @@
     }
 </script>
 
-<style scoped>
+<style>
     .map {
-        width: 400px;
+        max-width: 400px;
         height: 400px;
     }
-
+    
     .event-details {
-        border: 3px solid hotpink;
+        position: relative;
+        width: 60%;
+    }
+    
+    img {
+        max-width: 100%;
+        width: 100%;
+    }
+    
+    @media screen and (max-width: 768px) {
+        .event-details {
+            width: 90%;
+            margin: 0 auto;
+        }
     }
 </style>

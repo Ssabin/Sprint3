@@ -13,7 +13,10 @@
     "lint": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs"
   },
   "dependencies": {
+    "bootstrap": "^3.3.7",
+    "debounce": "^1.0.0",
     "google-maps": "^3.2.1",
+    "jquery": "^3.1.1",
     "vue": "^2.1.0",
     "vue-resource": "^1.0.3",
     "vue-router": "^2.1.1"

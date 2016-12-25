@@ -1,22 +1,25 @@
 <template>
-    <section>
-        <!--{{email}}-->
-        <!--<div class="close" @click="closeDetails">X</div>-->
-        <h1 class="title">{{email.subject}}</h1>
-        <div class="details">
-            <div>
-                <p>From: {{email.from}}</p>
-                <!--<p>From: {{email.to}}</p>-->
-            </div>
-            <p class="time">At: {{email.date}}</p>
+    <section class="email-details__container">
+        <nav class="app-nav">
+            <router-link class="btn btn-primary" to="/email" exact>Email List</router-link>
+            <button class="btn btn-danger" @click="deleteEmail">DELETE</button>
+        </nav>
+        <div class="email-detail">
+            <span>Subject:</span>
+            <p class="title">{{email.subject}}</p>
         </div>
-        <p class="email-title title">Content:</p>
+        <div class="email-detail">
+            <span>From:</span>
+            <p>{{email.from}}</p>
+        </div>
+        <div class="email-detail">
+            <span>At:</span>
+            <p>{{email.date}}</p>
+        </div>
+        <div class="shadow-divider"></div>
         <div class="email-content">
             {{email.content}}
         </div>
-        <button @click="deleteEmail">DELETE</button>
-
-        <!--<button class="delete-btn" @click="deleteEmail">Delete Email</button>-->
     </section>
 </template>
 
@@ -49,12 +52,6 @@
 
                 this.$http.delete(`email/${this.email.id}`).then(handleResult);
             }
-            // closeDetails(ev){
-            //     this.$emit('closeDetails');
-            // },
-            // deleteEmail(){
-            //     this.$emit('deleteEmail',this.email.id);
-            // }
         },
         created(){
             const emailId = this.$route.params.id;
@@ -65,42 +62,18 @@
 </script>
 
 <style scoped>
-    /*.email-details {
-        padding: 10px 30px;
+    .email-details__container{
         position: relative;
     }
-    .close{
-        position: absolute;
-        right: 10px;
-        cursor: pointer;
-    }
-    .email-title{
-        margin: 10px 0;
-    }
-
-    .details{
+    .email-detail{
         display: flex;
-        justify-content: space-between;
-        color: #a5a5a5;
+        font-weight: bold;
     }
-    .email-content{
-        padding-bottom:100px;
+    .shadow-divider{
+        width: 100%;
+        height: 1px;
+        box-shadow: 0 1px 2px #000;
+        opacity: 0.5;
+        margin-bottom: 10px;
     }
-    .time{
-        align-self: flex-end;
-    }
-    .delete-btn{
-        background: whitesmoke;
-        border: #333 1px solid;
-        padding: 10px;
-        position: absolute;
-        bottom: 10px;
-        cursor: pointer;
-        transition: all 0.7s ease;
-    }
-
-    .delete-btn:hover{
-        color: #FFF;
-        background: #333;
-    }*/
 </style>

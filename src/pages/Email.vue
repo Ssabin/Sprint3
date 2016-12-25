@@ -1,11 +1,15 @@
 <template>
     <section>
-        <h1>Email Page</h1>
-        <nav>
-            <router-link to="/email" active-class="active" exact>Email List</router-link> 
-            <router-link to="/email/compose" active-class="active" exact>Add Email</router-link> 
-        </nav>
-        <router-view></router-view>
+        <h1 class="">Email</h1>
+        <!--<nav class="app-nav">
+            <button class="btn btn-primary">
+                <router-link to="/email" exact>Email List</router-link>
+            </button>
+            <button class="btn btn-primary">
+                <router-link to="/email/compose" exact>Add Email</router-link>
+            </button>
+        </nav>-->
+        <router-view class="app-container well"></router-view>
     </section>
 </template>
 
@@ -24,5 +28,4 @@
 </script>
 
 <style scoped>
-
 </style>

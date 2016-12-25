@@ -1,6 +1,5 @@
 <template>
     <section>
-         <!--{{place.name}} -->
          <div style="border: 1px solid black">
              <p>
                  {{place.name}}

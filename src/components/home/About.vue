@@ -1,8 +1,9 @@
 <template>
     <section>
-        <h1>About Section</h1>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus nam cupiditate impedit iure! Minus velit hic, itaque facilis modi dignissimos iste voluptate minima quibusdam atque eveniet fugit alias totam at?</p>
-        <hr>
+        <div class="full-page__inner-container">
+            <h1>About Section</h1>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus nam cupiditate impedit iure! Minus velit hic, itaque facilis modi dignissimos iste voluptate minima quibusdam atque eveniet fugit alias totam at?</p>
+        </div>
     </section>
 </template>
 
@@ -18,5 +19,4 @@
 </script>
 
 <style scoped>
-
 </style>

@@ -1,11 +1,9 @@
 <template>
     <section class="email">
-        
-        <!--<router-link :to="`/email/edit/${email.id}`">Edit</router-link>-->
-        <router-link :to="`/email/${email.id}`">
-            <h3>{{email.subject}}</h3>
-            <p>{{email.date}}</p>
+        <router-link :to="`/email/${email.id}`" class="email-preview">
+            <p class="email-preview__subject">{{email.subject}}</p>
             <p>{{email.content.slice(0,20)}}...</p>
+            <p>{{email.date}}</p>
         </router-link>
     </section>
 </template>
@@ -20,23 +18,30 @@
         },
         data(){
             return {
-
             }
-        },
-        methods: {
-            
-            // showEmailDetails () {
-            //     this.$emit('showEmailDetails' , this.email.id);
-
-            // }
         }
     }
 </script>
 
-<style>
-
+<style scoped>
     .email {
-        border: 1px solid #585858;
+        border-top: 1px solid #585858;
+        border-left: 1px solid #585858;
+        border-right: 1px solid #585858;
     }
-
+    .email:last-child{
+        border-bottom: 1px solid #585858;
+    }
+    .email-preview{
+        display: flex;
+        justify-content: space-between;
+        padding: 0 5px;
+        color: #444;
+    }
+    .email-preview:hover{
+        text-decoration: none;
+    }
+    .email-preview__subject{
+        width: 20%;
+    }
 </style>

@@ -1,21 +1,33 @@
 <template>
     <section>
+        <nav class="app-nav">
+            <router-link class="btn btn-primary" to="/event" exact>Event List</router-link>
+        </nav>
         <h1>Event Edit Section</h1>
-        <div>
-            <input ref="name" type="text" placeholder="title" v-model.lazy="eventToEdit.name">
-            <div>
-                <input ref="status" type="text" placeholder="status" v-model.lazy="eventToEdit.status"> | 
-                <input ref="date" type="date" :value="inputDateFormat" @input="getTimeStamp"/>
+        <form>
+            <div class="form-group">
+                <input class="form-control" ref="name" type="text" placeholder="title" v-model.lazy="eventToEdit.name">
             </div>
-            <input ref="time" type="time" :value="inputTimeFormat" @input="getTimeStamp"/>
+            <div class="form-group">
+                <input class="form-control" ref="address" type="text" placeholder="address" v-model.lazy="eventToEdit.venue.address_1">
+            </div>
+            <div class="form-group">
+                <input class="form-control" ref="date" type="date" :value="inputDateFormat" @input="getTimeStamp" />
+            </div>
+            <div class="form-group">
+                <input class="form-control" ref="time" type="time" :value="inputTimeFormat" @input="getTimeStamp" />
+            </div>
+            <div class="form-group">
+                <input class="form-control" ref="link" type="text" placeholder="Event link" v-model.lazy="eventToEdit.link" />
+            </div>
+            <div class="form-group">
+                <textarea class="form-control" ref="description" cols="30" rows="10" v-model.lazy="eventToEdit.description"></textarea>
+            </div>
+            <button class="btn btn-success" @click.prevent="save">Save</button>
+            <!--<button class="btn btn-warning" @click.prevent="resetForm">Reset</button>-->
+            <button class="btn btn-danger" @click.prevent="goBack">Cancel</button>
             <!--Todo: Geocode search input-->
-            <input ref="link" type="text" placeholder="Event link" v-model.lazy="eventToEdit.link"/>
-            <br>
-            <textarea ref="description" cols="30" rows="10" v-model.lazy="eventToEdit.description"></textarea>
-            <button @click.prevent="save">Save</button>
-            <button @click.prevent="resetForm">Reset</button>
-        </div>
-        <hr>
+        </form>
     </section>
 </template>
 
@@ -39,7 +51,7 @@
                         "lat": 32.106529235839844,
                         "lon": 34.83524703979492,
                         "repinned": false,
-                        "address_1": "HaBarzel 6",
+                        "address_1": "",
                         "city": "Tel Aviv-Yafo",
                         "country": "il",
                         "localized_country_name": "Israel"
@@ -71,6 +83,9 @@
             },
             inputTimeFormat(){
                 return this.getInputTimeFormat(this.eventToEdit.time)
+            },
+            addressToSearch(){
+                return `https://maps.googleapis.com/maps/api/geocode/json?address=${this.event.venue.address_1}&key=AIzaSyCt_f62xnUudkGEFHC7UgShw58cYlVXf24`
             }
         },
         methods: {
@@ -100,6 +115,9 @@
                 this.$refs.description.value = this.event.description; 
                 this.$refs.link.value = this.event.link; 
             },
+            goBack(){
+                window.history.back();                
+            },
            save() {
                 let that = this;
                 function handleResult(res) {
@@ -111,9 +129,17 @@
                        }) 
                 }
 
-                console.log('Saving', this.eventToEdit);
-                if (this.eventToEdit.id)  this.$http.put(`event`, this.eventToEdit).then(handleResult);
-                else this.$http.post('event', this.eventToEdit).then(handleResult);
+                this.$http.get(this.addressToSearch)
+                    .then(res => res.json())
+                    .then(address => {
+                        this.eventToEdit.venue.address_1 = address.results[0].formatted_address;
+                        // console.log(address)
+                        this.eventToEdit.venue.lat = address.results[0].geometry.location.lat;
+                        this.eventToEdit.venue.lng = address.results[0].geometry.location.lng;
+                        console.log('Saving', this.eventToEdit);
+                        if (this.eventToEdit.id)  this.$http.put(`event`, this.eventToEdit).then(handleResult);
+                        else this.$http.post('event', this.eventToEdit).then(handleResult);
+                    })
             },
     },
     created(){

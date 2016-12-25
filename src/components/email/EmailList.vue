@@ -1,13 +1,10 @@
 <template>
     <section>
-        <!--<slot></slot>-->
-        <!--<div v-for="currEmail in emails">-->
-            <!--{{filteredEmails}}-->
-            <email-preview 
+            <email-preview
+                :class="{notRead: !email.isRead}"
                 v-for="email in filteredEmails"
                 :email="email">
             </email-preview>
-        <!--</div>-->
     </section>
 </template>
 
@@ -25,12 +22,6 @@
 
             }
         },
-        methods:{
-            // showEmailDetails(emailId) {
-            //         console.log(emailId);
-            //         this.$emit('showEmailDetails',emailId)
-            // }
-        },
         components: {
             EmailPreview
         }
@@ -38,14 +29,8 @@
 </script>
 
 <style scoped>
-    /*.email-preview {
-        border: 1px solid white;
-        padding: 10px 30px;
-        margin-right: 10px;
-        cursor: pointer;
+    .notRead{
+        font-weight: bold;  
+        background: #e3e3e3;
     }
-    
-  .notRead{
-    background: #e3e3e3;
-  }*/
 </style>
