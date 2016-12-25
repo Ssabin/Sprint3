@@ -1,6 +1,10 @@
 <template>
     <section>
-        <h1>Event Center Section</h1>
+        <nav class="app-nav">
+                <router-link class="btn btn-primary" to="/place/edit" exact>
+                    Add Place
+                </router-link> 
+        </nav>
         <place-filter @filterPlaces="updateFilter"></place-filter>
         <place-list :filteredPlaces="filteredPlaces"></place-list>
     </section>

@@ -1,9 +1,10 @@
 <template>
-    <section>
+    <section class="email-filter__container">
+        <h3>Filter Events</h3>
         <input type="text" v-model.lazy="filter.name" placeholder="Name" />
         <input type="text" v-model.lazy="filter.city" placeholder="City" />
         <input type="date" v-model.lazy="choosenDate" @change="checkIfValidDate">
-        <button @click="$emit('filterEvents', filter)">Filter</button>
+        <button class="btn btn-success" @click="$emit('filterEvents', filter)">Filter</button>
         <hr>
     </section>
 </template>
@@ -23,10 +24,6 @@
         methods: {
 
             checkIfValidDate() {
-
-                //DOTO: if we choose today we get false
-                // console.log(new Date(this.filter.date) >= Date.now());
-
                 if (new Date(this.choosenDate) >= Date.now()) {
                     this.filter.date = this.choosenDate;   
                 } else {
@@ -43,5 +40,19 @@
 </script>
 
 <style scoped>
-
+    .email-filter__container{
+        text-align: center;
+    }
+    input{
+        padding: 4px 0;
+    }
+    @media screen and (max-width: 560px){
+        .email-filter__container{
+            display: flex;
+            flex-direction: column;       
+        }
+        .email-filter__container input{
+            margin-bottom: 5px;
+        }
+    }
 </style>

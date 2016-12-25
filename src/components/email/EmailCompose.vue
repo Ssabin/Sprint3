@@ -1,13 +1,21 @@
 <template>
     <section class="message">
-
-        <h1>Email compose</h1>
-            <input class="input" type="email" placeholder="To" v-model="composedEmail.to" />
-            <input class="input" disabled type="text" placeholder="from myself"/>
-            <input class="input" type="text" placeholder="Subject" v-model="composedEmail.subject" />
-            <textarea ref="content" v-model="composedEmail.content" placeholder="Write Your Message Here..."></textarea>
-            <button @click="sendEmail"> Send </button>
-
+        <nav class="app-nav">
+            <router-link class="btn btn-primary" to="/email" exact>Email List</router-link>
+        </nav>
+        <form>
+            <div class="form-group">
+                <input type="email" class="form-control" placeholder="To" v-model="composedEmail.to" />
+            </div>
+            <div class="form-group">
+                <input class="form-control" type="text" placeholder="Subject" v-model="composedEmail.subject" />
+            </div>
+            <div class="form-group">
+                <textarea class="form-control" rows="5" ref="content" v-model="composedEmail.content" placeholder="Write Your Message Here..."></textarea>
+            </div>
+            <button type="submit" class="btn btn-success" @click.prevent="sendEmail">Submit</button>
+            <button class="btn btn-danger" @click.prevent="goBack">Cancel</button>
+        </form>
     </section>
 </template>
 
@@ -39,42 +47,15 @@
                        }) 
                 }
 
-                // console.log('Saving', this.eventToEdit);
-                // if (this.eventToEdit.id)  this.$http.put(`event`, this.eventToEdit).then(handleResult);
                 this.$http.post('email', this.composedEmail).then(handleResult);
+            },
+            goBack(){
+                window.history.back();                
             }
-
-
-
-
-
-
-
-
-
-
-
-
-            // emitComposedEmail(){
-            //     // console.log('refs' , this.$refs)
-            //     this.$refs.subject.value = '';
-            //     this.$refs.to.value = '';
-            //     this.$refs.content.value = '';
-            //     this.$emit('emitComposedEmail' , this.composedEmail);
-            //     this.composedEmail = {
-            //         subject: '',
-            //         from: this.emailComposer,
-            //         to: '',
-            //         content: ``,
-            //         isRead: false
-            //     }
-            // }
         }
     }
 </script>
 
 <style>
-    /*.message{
-        padding: 20px;
-    }*/
+
 </style>

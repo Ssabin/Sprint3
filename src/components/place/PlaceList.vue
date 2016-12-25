@@ -1,11 +1,6 @@
 <template>
     <section class="place-list-section">
-         {{filteredPlaces}}
         <div class="map" ref="map"></div>
-        <button @click="removeMarkers">Remove markers</button>
-        
-       
-        
     </section>
 </template>
 
@@ -39,7 +34,7 @@
                 this.markers = [];
             },
             loadMarkers() {
-                console.log(this.filteredPlaces)
+                console.log('filteredPlaces',this.filteredPlaces)
                 this.filteredPlaces.forEach(place => {
                     let lat = place.lat;
                     let lng = place.lng;
@@ -54,18 +49,14 @@
                         this.$router.push(`/place/${place.id}`);
                     });
                 });
-            },
-            createMap() {
-                this.map = new google.maps.Map(this.$refs.map, this.mapOptions);
-                this.loadMarkers();
             }
         },
         watch: {
             filteredPlaces(curr, prev) {
                 console.log('curr', curr)
                 console.log('prev', prev)
-                this.removeMarkers();
-                if(prev.length !== 0) {
+                if(this.map) {
+                    this.removeMarkers();
                     this.loadMarkers();
                 }
             }    
@@ -73,38 +64,18 @@
         components:{
           PlacePreview
         },
-        // created monuted !?!
         mounted() {
-            
-
             GoogleMapsLoader.load(google => {
                 var myLatlng = new google.maps.LatLng(32.106529235839844, 34.83524703979492);
                 this.mapOptions = {
                     center: myLatlng,
-                    zoom: 2,
+                    zoom: 12,
                     zoomControl: true
                 };
                 this.map = new google.maps.Map(this.$refs.map, this.mapOptions);
                 this.loadMarkers();
-                     
-            });
-
-            // console.log(this.filteredPlaces)
-               
-        },
-        beforeMount() {
-            }
-        // mounted() {
-        //     console.log('mounted')
-        //     console.log(this.isMapCreated)
-        //     console.log(this.$refs)
-        //     if (!this.isMapCreated) {
-        //         this.createMap()
-        //         // this.loadMarkers()
-        //         };
-            
-        // }
-           
+            });               
+        }
     }
 </script>
 

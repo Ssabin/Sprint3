@@ -1,7 +1,11 @@
 <template>
     <section>
-        <p>Total email count: {{totalEmailCount}}</p>
-        <p>Unread email count: {{unreadEmailCount}}</p>
+
+        <div class="progress">
+            <div class="progress-bar" role="progressbar"  v-bind:style="{ width: progressBarWidth }">
+                <p>unread emails: {{unreadEmailCount}}/{{totalEmailCount}}</p>
+            </div>
+        </div>
     </section>
 </template>
 
@@ -17,6 +21,11 @@
                 type: Number 
             }
         },
+        computed: {
+            progressBarWidth() {
+                return this.unreadEmailCount / this.totalEmailCount * 100 + '%'
+            }
+        },
         data(){
             return {
             }
@@ -27,6 +36,19 @@
     }
 </script>
 
-<style>
+<style scoped>
+    .progress {
+        margin: 10px 0;
+        height: 30px;
+    }
 
+    .progress-bar {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .progress-bar > p {
+        margin: 0;
+    }
 </style>

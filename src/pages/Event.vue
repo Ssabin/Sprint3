@@ -1,11 +1,7 @@
 <template>
     <section>
-        <h1>Event Page</h1>
-        <nav>
-            <router-link to="/event" active-class="active" exact>Event List</router-link> 
-            <router-link to="/event/edit" active-class="active" exact >Add Event</router-link> 
-        </nav>
-        <router-view ></router-view>
+        <h1>Events</h1>
+        <router-view class="app-container well"></router-view>
     </section>
 </template>
 
@@ -26,5 +22,8 @@
 </script>
 
 <style scoped>
-
+    .app-nav{
+        margin: 10px 0;
+        text-align: center;
+    }
 </style>

@@ -1,25 +1,28 @@
 <template>
     <section>
-         <div>  
-             Name: <h3>{{event.name}}</h3>
-             <div>
-                 <h3>Location</h3>
-                 <ul>
-                     <li>
-                         {{event.venue.name}}
-                     </li>
-                     <li>
-                         {{event.venue.address_1}} , {{event.venue.city}} , {{event.venue.localized_country_name}} 
-                     </li>
-                 </ul>
-             </div>
-             <span>At: {{day}}</span>
-             <!--Link: <a :href="`${event.link}`">Link To MeetUp</a>-->
-             <h3>description</h3>
-              <p v-html="eventDescription"></p>
-             <router-link :to="`/event/edit/${event.id}`">Edit</router-link>
-             <router-link :to="`/event/${event.id}`">Read more</router-link>
-         </div>
+        <div class="event-preview-container">
+            <h3>{{event.name}}</h3>
+            <div>
+                <h3>Location</h3>
+                <ul>
+                    <li>
+                        {{event.venue.name}}
+                    </li>
+                    <li>
+                        {{event.venue.address_1}} , {{event.venue.city}} , {{event.venue.localized_country_name}}
+                    </li>
+                </ul>
+            </div>
+            <p v-html="eventDescription"></p>
+            <div class="event-preview__buttons">
+                <button class="btn btn-info">
+                    <router-link :to="`/event/edit/${event.id}`">Edit</router-link>
+                </button>
+                <button class="btn btn-info">
+                    <router-link :to="`/event/${event.id}`">Read more</router-link>
+                </button>
+            </div>    
+        </div>
     </section>
 </template>
 
@@ -44,14 +47,24 @@
         },
         computed:{
             eventDescription(){
-                //removes all HTML elements from description for the preview and bring only 100 chars
                 return this.event.description.replace(/(<([^>]+)>)/ig,'').slice(0,100) + '...';
             }
         }
-
     }
 </script>
 
 <style scoped>
+.event-preview-container {
+    padding: 5px;
+    height: 100%;
+    position: relative;
+    padding-bottom: 50px;
+}
 
+
+.event-preview__buttons {
+    position: absolute;
+    bottom: 5px;
+    left: 5px;
+}
 </style>
