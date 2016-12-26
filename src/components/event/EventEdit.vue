@@ -9,7 +9,7 @@
                 <input class="form-control" ref="name" type="text" placeholder="title" v-model.lazy="eventToEdit.name">
             </div>
             <div class="form-group">
-                <input class="form-control" ref="address" type="text" placeholder="address" v-model.lazy="eventToEdit.venue.address_1">
+                <input class="form-control" ref="address" type="text" placeholder="address" v-model.lazy="eventToEdit.venue.address_1">     
             </div>
             <div class="form-group">
                 <input class="form-control" ref="date" type="date" :value="inputDateFormat" @input="getTimeStamp" />
@@ -120,6 +120,9 @@
             },
            save() {
                 let that = this;
+                toastr.options.closeButton = true;
+                toastr.options.timeOut = 1000;
+                toastr.success('The event have been saved');
                 function handleResult(res) {
                     res.json()
                    .then(res => {

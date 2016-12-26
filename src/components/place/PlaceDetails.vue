@@ -12,12 +12,13 @@
         <h1>{{place.name}}</h1>
         <div class="tags">
             <h4>People tagged this place has:</h4>
-            <span class="tag" v-for="tag in place.tags">{{tag}} , </span>
+            <ul class="clean-list">
+                <li v-for="tag in place.tags">{{tag}}</li>
+            </ul>
+            <!--<span class="tag" v-for="tag in place.tags">{{tag}} , </span>-->
         </div>
         <div class="map" ref="map"></div>
-        <!--<ul class="clean-list">
-            <li v-for="tag in place.tags">{{tag}}</li>
-        </ul>-->
+        
     </section>
 </template>
 
@@ -32,17 +33,9 @@
             }
         },
         methods: {
-            loadPlace(placeId) {    
-                this.$http.get(`place/${placeId}`)
-                   .then(res => res.json())
-                   .then(place => this.place = place);
-           }
         },
-        mounted(){
-            const placeId = this.$route.params.id;
-            this.loadPlace(placeId);
-
-            GoogleMapsLoader.load(google => {
+        updated() {
+             GoogleMapsLoader.load(google => {
                 var myLatlng = new google.maps.LatLng(this.place.lat, this.place.lng);
                 this.mapOptions = {
                     center: myLatlng,
@@ -59,25 +52,15 @@
                     animation: google.maps.Animation.DROP
                 });
             });
-        }
-        // },
-        // beforeRouteLeave(to, from, next) {
-        //         if (this.dataSaved) return next();
-        //         if (this.place.name === this.placeToEdit.name &&
-        //             this.place.lat === this.placeToEdit.lat &&
-        //             this.place.lng === this.place.lng &&
-        //             this.place.tags === this.place.tags)
-        //         // if (this.event.name  === this.eventToEdit.name &&
-        //         //     this.event.status  === this.eventToEdit.status &&
-        //         //     this.event.time === this.eventToEdit.time &&
-        //         //     this.event.description  === this.eventToEdit.description)
-        //             return next();
 
-        //         const ans = confirm('Change will not save!');
-        //         if (ans)        next();
-        //         else            next(false)
-                
-        // }
+        },
+        created() {
+            const placeId = this.$route.params.id;            
+             this.$http.get(`place/${placeId}`)
+                   .then(res => res.json())
+                   .then(place => this.place = place);
+            
+        }
     }
 </script>
 
@@ -89,5 +72,11 @@
     .map {
         width: 100%;
         max-width: 100%;
+    }
+
+    ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
     }
 </style>
