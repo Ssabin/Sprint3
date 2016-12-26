@@ -1,7 +1,7 @@
 <template>
     <section class="message">
         <nav class="app-nav">
-            <router-link class="btn btn-primary" to="/email" exact>Email List</router-link>
+            <router-link class="btn btn-main" to="/email" exact>Email List</router-link>
         </nav>
         <form>
             <div class="form-group">
@@ -13,8 +13,8 @@
             <div class="form-group">
                 <textarea class="form-control" rows="5" ref="content" v-model="composedEmail.content" placeholder="Write Your Message Here..."></textarea>
             </div>
-            <button type="submit" class="btn btn-success" @click.prevent="sendEmail">Submit</button>
-            <button class="btn btn-danger" @click.prevent="goBack">Cancel</button>
+            <button type="submit" class="btn btn-add" @click.prevent="sendEmail">Submit</button>
+            <button class="btn btn-delete" @click.prevent="goBack">Cancel</button>
         </form>
     </section>
 </template>

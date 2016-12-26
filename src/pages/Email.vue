@@ -1,14 +1,6 @@
 <template>
-    <section>
-        <h1 class="">Email</h1>
-        <!--<nav class="app-nav">
-            <button class="btn btn-primary">
-                <router-link to="/email" exact>Email List</router-link>
-            </button>
-            <button class="btn btn-primary">
-                <router-link to="/email/compose" exact>Add Email</router-link>
-            </button>
-        </nav>-->
+    <section class="emailBg">
+        <h1 class="page-title">Email</h1>
         <router-view class="app-container well"></router-view>
     </section>
 </template>
@@ -28,4 +20,12 @@
 </script>
 
 <style scoped>
+    .emailBg{
+        height: 100vh;
+        background-image: url('../assets/imgs/cover1.jpg'); 
+        background-attachment: fixed;
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
 </style>

@@ -1,7 +1,7 @@
 <template>
     <section>
         <nav class="app-nav">
-                <router-link class="btn btn-primary" to="/event/edit" exact >
+                <router-link class="btn btn-add" to="/event/edit" exact >
                     Add Event
                 </router-link>
         </nav>

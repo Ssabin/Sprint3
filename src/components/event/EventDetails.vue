@@ -1,15 +1,15 @@
 <template>
     <section class="event-details">
         <nav class="app-nav">
-            <router-link class="btn btn-primary" to="/event" exact>Event List</router-link>
-            <router-link class="btn btn-warning" :to="`/event/edit/${event.id}`">Edit</router-link>
+            <router-link class="btn btn-main" to="/event" exact>Event List</router-link>
+            <router-link class="btn btn-add" :to="`/event/edit/${event.id}`">Edit</router-link>
         </nav>
         <h1>{{event.name}}</h1>
         <p><strong>Status:</strong> {{event.status}}</p>
         <div class="description" v-html="event.description"></div>
         <p><strong>Location:</strong> {{event.venue.address_1}} - {{event.venue.city}} </p>
-        <p>Time: {{formatedDate}}</p>
-        <p>Link: <a :href="event.link">MEETUP</a> </p>
+        <p><strong>Time:</strong> {{formatedDate}}</p>
+        <p><strong>Link:</strong> <a :href="event.link">MEETUP</a> </p>
 
         <div class="map" ref="map"></div>
         <!--<hr>-->

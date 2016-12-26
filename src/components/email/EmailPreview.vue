@@ -2,8 +2,8 @@
     <section class="email">
         <router-link :to="`/email/${email.id}`" class="email-preview">
             <p class="email-preview__subject">{{email.subject}}</p>
-            <p>{{email.content.slice(0,20)}}...</p>
-            <p>{{email.date}}</p>
+            <p class="email-preview__description">{{email.content.slice(0,20)}}...</p>
+            <p>{{getDateFormat(email.date)}}</p>
         </router-link>
     </section>
 </template>
@@ -19,18 +19,20 @@
         data(){
             return {
             }
+        },
+        methods: {
+            getDateFormat(ts){
+                let d = new Date(ts);
+                let dateFormatStr = `${d.getDate()}/${d.getMonth() + 1}/${d.getFullYear()}`;
+                return dateFormatStr;
+            }
         }
     }
 </script>
 
 <style scoped>
     .email {
-        border-top: 1px solid #585858;
-        border-left: 1px solid #585858;
-        border-right: 1px solid #585858;
-    }
-    .email:last-child{
-        border-bottom: 1px solid #585858;
+        border-bottom: 1px solid #787878;
     }
     .email-preview{
         display: flex;
@@ -43,5 +45,13 @@
     }
     .email-preview__subject{
         width: 20%;
+    }
+    @media screen and (max-width: 480px){
+        .email-preview__subject{
+            width: 100%;
+        }
+        .email-preview__description{
+            display: none;
+        }
     }
 </style>

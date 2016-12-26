@@ -1,7 +1,7 @@
 <template>
   <section class="email-section">
     <nav class="app-nav">
-      <router-link class="btn btn-primary" to="/email/compose" exact>
+      <router-link class="btn btn-add" to="/email/compose" exact>
         Add Email
       </router-link>
     </nav>

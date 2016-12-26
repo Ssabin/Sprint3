@@ -1,7 +1,7 @@
 <template>
     <section>
         <nav class="app-nav">
-                <router-link class="btn btn-primary" to="/place/edit" exact>
+                <router-link class="btn btn-add" to="/place/edit" exact>
                     Add Place
                 </router-link> 
         </nav>
