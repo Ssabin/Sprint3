@@ -1,7 +1,7 @@
 <template>
     <section>
         <nav class="app-nav">
-            <router-link class="btn btn-primary" to="/event" exact>Event List</router-link>
+            <router-link class="btn btn-main" to="/event" exact>Event List</router-link>
         </nav>
         <h1>Event Edit Section</h1>
         <form>
@@ -23,9 +23,9 @@
             <div class="form-group">
                 <textarea class="form-control" ref="description" cols="30" rows="10" v-model.lazy="eventToEdit.description"></textarea>
             </div>
-            <button class="btn btn-success" @click.prevent="save">Save</button>
+            <button class="btn btn-add" @click.prevent="save">Save</button>
             <!--<button class="btn btn-warning" @click.prevent="resetForm">Reset</button>-->
-            <button class="btn btn-danger" @click.prevent="goBack">Cancel</button>
+            <button class="btn btn-delete" @click.prevent="goBack">Cancel</button>
             <!--Todo: Geocode search input-->
         </form>
     </section>

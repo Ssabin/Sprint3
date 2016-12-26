@@ -15,13 +15,9 @@
             </div>
             <p v-html="eventDescription"></p>
             <div class="event-preview__buttons">
-                <button class="btn btn-info">
-                    <router-link :to="`/event/edit/${event.id}`">Edit</router-link>
-                </button>
-                <button class="btn btn-info">
-                    <router-link :to="`/event/${event.id}`">Read more</router-link>
-                </button>
-            </div>    
+                <router-link class="btn btn-add" :to="`/event/edit/${event.id}`">Edit</router-link>
+                <router-link class="btn btn-main" :to="`/event/${event.id}`">Read more</router-link>
+            </div>
         </div>
     </section>
 </template>
@@ -54,17 +50,16 @@
 </script>
 
 <style scoped>
-.event-preview-container {
-    padding: 5px;
-    height: 100%;
-    position: relative;
-    padding-bottom: 50px;
-}
-
-
-.event-preview__buttons {
-    position: absolute;
-    bottom: 5px;
-    left: 5px;
-}
+    .event-preview-container {
+        padding: 5px;
+        height: 100%;
+        position: relative;
+        padding-bottom: 50px;
+    }
+    
+    .event-preview__buttons {
+        position: absolute;
+        bottom: 5px;
+        left: 5px;
+    }
 </style>

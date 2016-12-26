@@ -1,11 +1,11 @@
 <template>
     <section>
         <nav class="app-nav">
-            <router-link class="btn btn-primary" to="/place" exact>
+            <router-link class="btn btn-main" to="/place" exact>
                 Place List
             </router-link>
 
-            <router-link class="btn btn-warning" :to="`/place/edit/${place.id}`">
+            <router-link class="btn btn-add" :to="`/place/edit/${place.id}`">
                 Edit
             </router-link>
         </nav>

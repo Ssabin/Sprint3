@@ -46,6 +46,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        background: #D23F31;
     }
 
     .progress-bar > p {

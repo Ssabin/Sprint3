@@ -1,7 +1,7 @@
 <template>
     <section>
         <nav class="app-nav">
-            <router-link class="btn btn-primary" to="/place" exact>
+            <router-link class="btn btn-main" to="/place" exact>
                 Place List
             </router-link>
         </nav>
@@ -16,8 +16,8 @@
             <div class="form-group">
                 <input class="form-control" ref="tags" type="text" placeholder="Tags" v-model.lazy="tagsString">
             </div>
-            <button class="btn btn-success" @click.prevent="save">Submit</button>
-            <button class="btn btn-danger" @click.prevent="goBack">cancel</button>
+            <button class="btn btn-add" @click.prevent="save">Submit</button>
+            <button class="btn btn-delete" @click.prevent="goBack">Cancel</button>
         </form>
     </section>
 </template>

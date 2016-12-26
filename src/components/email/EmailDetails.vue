@@ -1,8 +1,8 @@
 <template>
     <section class="email-details__container">
         <nav class="app-nav">
-            <router-link class="btn btn-primary" to="/email" exact>Email List</router-link>
-            <button class="btn btn-danger" @click="deleteEmail">DELETE</button>
+            <router-link class="btn btn-main" to="/email" exact>Email List</router-link>
+            <button class="btn btn-delete" @click="deleteEmail">DELETE</button>
         </nav>
         <div class="email-detail">
             <span>Subject:</span>

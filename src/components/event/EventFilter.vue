@@ -4,7 +4,7 @@
         <input type="text" v-model.lazy="filter.name" placeholder="Name" />
         <input type="text" v-model.lazy="filter.city" placeholder="City" />
         <input type="date" v-model.lazy="choosenDate" @change="checkIfValidDate">
-        <button class="btn btn-success" @click="$emit('filterEvents', filter)">Filter</button>
+        <button class="btn btn-filter" @click="$emit('filterEvents', filter)">Filter</button>
         <hr>
     </section>
 </template>
