@@ -38,6 +38,9 @@
             sendEmail() {
                 this.composedEmail.date = new Date(Date.now());
                 let that = this;
+                toastr.options.closeButton = true;
+                toastr.options.timeOut = 1000;
+                toastr.success('The email has been added'); 
                 function handleResult(res) {
                     res.json()
                    .then(res => {

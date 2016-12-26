@@ -5,10 +5,11 @@
                 Place List
             </router-link>
         </nav>
-        <h1>Place Edit Section</h1>
+
+        
         <form>
             <div class="form-group">
-                <input class="form-control" ref="name" type="text" placeholder="name" v-model.lazy="placeToEdit.name">
+                <input class="form-control" ref="name" type="text" placeholder="name" v-model.lazy="place.name">
             </div>
             <div class="form-group">
                 <input type="text" ref="address" class="form-control" placeholder="Address" v-model="place.address">
@@ -42,7 +43,7 @@
                 return Object.assign({} , this.place)
             },
             addressToSearch(){
-                return `https://maps.googleapis.com/maps/api/geocode/json?address=${this.place.adress}&key=AIzaSyCt_f62xnUudkGEFHC7UgShw58cYlVXf24`
+                return `https://maps.googleapis.com/maps/api/geocode/json?address=${this.place.address}&key=AIzaSyCt_f62xnUudkGEFHC7UgShw58cYlVXf24`
             }
         },
         methods: {
@@ -62,30 +63,28 @@
             },
            save() {
                 let that = this;
+                toastr.options.closeButton = true;
+                toastr.options.timeOut = 1000;
+                toastr.success('The place have been saved'); 
                 this.insertTags();
-                
-                this.$http.get(this.addressToSearch)
-                    .then(res => res.json())
-                    .then(address => {
-                        this.placeToEdit.address = address.results[0].formatted_address;
-                        // console.log(address)
-                        this.placeToEdit.lat = address.results[0].geometry.location.lat;
-                        this.placeToEdit.lng = address.results[0].geometry.location.lng;
-                        console.log('Saving', this.placeToEdit);
-                        if (this.placeToEdit.id)  this.$http.put(`place`, this.placeToEdit).then(handleResult);
-                        else this.$http.post('place', this.placeToEdit).then(handleResult);
-                });   
-
                 function handleResult(res) {
                     res.json()
                    .then(res => {
-                        console.log("Result from server", res);
                         this.dataSaved = true;
                         this.$router.push('/place');
                        }) 
                 }
-
-                
+                // console.log('this.addressToSearch',this.addressToSearch)
+                this.$http.get(this.addressToSearch)
+                    .then(res => res.json())
+                    .then(address => {
+                        
+                        this.placeToEdit.address = address.results[0].formatted_address;
+                        this.placeToEdit.lat = address.results[0].geometry.location.lat;
+                        this.placeToEdit.lng = address.results[0].geometry.location.lng;
+                        if (this.placeToEdit.id)  this.$http.put(`place`, this.placeToEdit).then(handleResult);
+                        else this.$http.post('place', this.placeToEdit).then(handleResult);
+                });   
             },
         },
         created(){

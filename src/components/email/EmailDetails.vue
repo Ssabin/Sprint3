@@ -20,10 +20,12 @@
         <div class="email-content">
             {{email.content}}
         </div>
+
     </section>
 </template>
 
 <script>
+
     export default{
         data(){
             return {
@@ -39,6 +41,9 @@
             deleteEmail() {
                 const isSure = confirm('Are you sure you want to delete?');
                 if (!isSure) return;
+                toastr.options.closeButton = true;
+                toastr.options.timeOut = 1000;
+                toastr.success('The email has been deleted');   
                 let that = this;
                 function handleResult(res) {
                     res.json()
