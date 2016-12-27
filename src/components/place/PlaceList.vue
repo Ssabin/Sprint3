@@ -34,7 +34,6 @@
                 this.markers = [];
             },
             loadMarkers() {
-                console.log('filteredPlaces',this.filteredPlaces)
                 this.filteredPlaces.forEach(place => {
                     let lat = place.lat;
                     let lng = place.lng;
@@ -53,8 +52,6 @@
         },
         watch: {
             filteredPlaces(curr, prev) {
-                console.log('curr', curr)
-                console.log('prev', prev)
                 if(this.map) {
                     this.removeMarkers();
                     this.loadMarkers();
@@ -87,7 +84,7 @@
     
     .map {
         margin: 0 auto;
-        width: 80%;
+        width: 100%;
         height: 400px;
     }
 </style>

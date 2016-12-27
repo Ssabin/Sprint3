@@ -65,6 +65,10 @@
 </script>
 
 <style scoped>
+    .app-nav{
+        display: flex;
+        justify-content: space-between;
+    }
     .tags {
         text-align: center;
     }

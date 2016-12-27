@@ -1,5 +1,5 @@
 <template>
-    <section class="placeBg">
+    <section ref="place" class="placeBg">
         <h1 class="page-title">Places</h1>
         <router-view class="app-container well"></router-view>
     </section>
@@ -12,7 +12,6 @@
             }
         },
         methods: {
-            
         },
         components: {
            

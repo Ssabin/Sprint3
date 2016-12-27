@@ -15,8 +15,8 @@
             </div>
             <p v-html="eventDescription"></p>
             <div class="event-preview__buttons">
-                <router-link class="btn btn-add" :to="`/event/edit/${event.id}`">Edit</router-link>
                 <router-link class="btn btn-main" :to="`/event/${event.id}`">Read more</router-link>
+                <router-link class="btn btn-add" :to="`/event/edit/${event.id}`">Edit</router-link>
             </div>
         </div>
     </section>
@@ -61,5 +61,8 @@
         position: absolute;
         bottom: 5px;
         left: 5px;
+        display: flex;
+        justify-content: space-between;
+        width: 95%;
     }
 </style>

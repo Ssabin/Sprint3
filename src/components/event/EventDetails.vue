@@ -84,10 +84,10 @@
     }
 </script>
 
-<style>
-    .map {
-        max-width: 400px;
-        height: 400px;
+<style scoped>
+    .app-nav{
+        display: flex;
+        justify-content: space-between;
     }
     
     .event-details {
