@@ -182,6 +182,12 @@ export default {
     background: #e7a61a;
     color: #fff;
   }
+
+  .map {
+          max-width: 100%;
+          height: 400px;
+      }
+
   
   @media screen and (min-width: 768px) {
     .app-container {

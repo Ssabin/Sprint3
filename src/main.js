@@ -1,6 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.css';
-// import 'jquery/dist/jquery.min.js'
-// import 'bootstrap/dist/js/bootstrap.min.js';
+import 'toastr/build/toastr.css'
+import toastr from 'toastr/build/toastr.min.js'
 import Vue from 'vue'
 import VueResource from 'vue-resource'
 import VueRouter from 'vue-router'
@@ -13,7 +13,7 @@ Vue.use(VueRouter);
 const myRouter = new VueRouter({routes: MyRoutes, mode: 'history'})
 
 Vue.http.options.root = 'http://localhost:3003';
-
+window.toastr = toastr;
 new Vue({
   router: myRouter,
   el: '#app',
