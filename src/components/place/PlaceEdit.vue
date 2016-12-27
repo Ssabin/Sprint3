@@ -29,6 +29,7 @@
 
     import GoogleMapsLoader from 'google-maps'; 
     GoogleMapsLoader.KEY = 'AIzaSyCt_f62xnUudkGEFHC7UgShw58cYlVXf24';
+    GoogleMapsLoader.LIBRARIES = ['places'];
 
     export default {
         data () {
