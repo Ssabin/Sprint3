@@ -46,6 +46,9 @@
             eventsByDays () {
                 return this.arrangeEmailsByDays();
             }
+        },
+        created() {
+            console.log(this.filteredEvents)
         }
     }
 </script>

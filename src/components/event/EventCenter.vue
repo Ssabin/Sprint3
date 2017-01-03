@@ -1,12 +1,12 @@
 <template>
     <section>
         <nav class="app-nav">
-                <router-link class="btn btn-add" to="/event/edit" exact >
-                    Add Event
-                </router-link>
+            <router-link class="btn btn-add" to="/event/edit" exact>
+                Add Event
+            </router-link>
         </nav>
-         <event-filter :events="events" @filterEvents="updateFilter"></event-filter>
-         <event-group :filteredEvents="filteredEvents"></event-group>
+        <event-filter :events="events" @filterEvents="updateFilter"></event-filter>
+        <event-group :filteredEvents="filteredEvents"></event-group>
     </section>
 </template>
 
@@ -21,7 +21,7 @@
                     name: '',
                     date: Date.now(),
                     city: ''
-                }           
+                }
             }
         },
         methods: {
@@ -45,9 +45,11 @@
         },
         computed: {
             filteredEvents() {
-                let filteredArray = this.events.filter(event => {
+                let filteredArray = this.events.filter((event, idx) => {
+                    
                     const filter = this.filter;
                     const name = event.name.toLowerCase();
+                    if(!event.venue) return false;
                     const city = event.venue.city.toLowerCase();
                     const time = event.time;
 
