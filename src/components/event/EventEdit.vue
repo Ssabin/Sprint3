@@ -32,6 +32,10 @@
 </template>
 
 <script>
+    // import GoogleMapsLoader from 'google-maps'; 
+    // GoogleMapsLoader.KEY = 'AIzaSyCt_f62xnUudkGEFHC7UgShw58cYlVXf24';
+    // GoogleMapsLoader.LIBRARIES = ['places'];
+    
     export default {
         data () {
             return {     
@@ -148,6 +152,21 @@
     created(){
             const eventId = this.$route.params.id;
             if(eventId)     this.loadEvent(eventId);
+    },
+    mounted() {
+            // console.log(this.$refs.address);
+
+            // let defaultBounds = new google.maps.LatLngBounds(
+            // new google.maps.LatLng(-33.8902, 151.1759),
+            // new google.maps.LatLng(-33.8474, 151.2631));
+
+            // let input = this.$refs.address;
+            // let options = {
+            //     bounds: defaultBounds,
+            //     // types: ['establishment']
+            // };
+
+            // let autocomplete = new google.maps.places.Autocomplete(input, options);
     },
     beforeRouteLeave(to, from, next) {
             if (this.dataSaved) return next();
